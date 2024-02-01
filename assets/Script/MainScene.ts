@@ -23,17 +23,26 @@ export default class MainScene extends cc.Component {
     @property(cc.Component)
     reels: Reels = null;
     reelsManager: ReelsManager = new ReelsManager();
+    isSpinButtonClicked: boolean = false;
 
     onLoad (): void {
         this.spinButton.node.on('click', this.onSpinButtonClick, this);
         this.node.on('reelsStopped', (event) => {
             this.onReelsStopped(event);
         });
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
+
+    onKeyDown(event): void {
+        if (event.keyCode === 32) {
+            this.onSpinButtonClick();
+        }
     }
 
     onReelsStopped(event): void {
         console.log('reels stopped event handled');
         event.stopPropagation();
+        this.isSpinButtonClicked = false;
         const wins = this.reelsManager.calculateWins();
         if (wins.length) {
             this.winLabelAmount.string = this.calculateTotalWin(wins);
@@ -51,6 +60,10 @@ export default class MainScene extends cc.Component {
     }
 
     onSpinButtonClick(): void {
+        if (this.isSpinButtonClicked) {
+            return;
+        }
+        this.isSpinButtonClicked = true;
         console.log(`on spin button clicked`);
         const stopSymbols = this.reelsManager.generateStopSymbols();
         console.log(`${JSON.stringify(stopSymbols)}`);
