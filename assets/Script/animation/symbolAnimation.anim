@@ -1,0 +1,36 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "symbolAnimation",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.1,
+  "sample": 30,
+  "speed": 0.2,
+  "wrapMode": 2,
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 0.45,
+            "y": 0.45,
+            "z": 1
+          },
+          "curve": "quadInOut"
+        },
+        {
+          "frame": 0.1,
+          "value": {
+            "__type__": "cc.Vec3",
+            "x": 0.7,
+            "y": 0.7,
+            "z": 1
+          }
+        }
+      ]
+    }
+  },
+  "events": []
+}
